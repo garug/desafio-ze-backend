@@ -1,0 +1,7 @@
+# Default ignore
+node_modules
+/dist
+
+# Environment Files
+.env.local
+.env.*.local
