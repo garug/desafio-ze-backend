@@ -14,8 +14,9 @@ export default class PartnerRepository {
         return savedPartner || undefined;
     }
 
-    async findByDocument(document: string): Promise<Array<IPartner>> {
-        return Partner.find({ document });
+    async findByDocument(document: string): Promise<IPartner | undefined> {
+        const savedPartner = await Partner.findOne({ document });
+        return savedPartner || undefined;
     }
 
     async findBySpecificLocation(point: Point): Promise<Array<IPartner>> {
@@ -31,11 +32,5 @@ export default class PartnerRepository {
                 },
             },
         });
-    }
-
-    async exists(partner: IPartner): Promise<boolean> {
-        const { id } = partner;
-        const exists = await Partner.findOne({ id }, 'id');
-        return !!exists;
     }
 }

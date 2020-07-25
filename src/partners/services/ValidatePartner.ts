@@ -9,14 +9,16 @@ export default class ValidatePartner {
     constructor(private repository: PartnerRepository) {}
 
     async hasUniqueDocument(partner: IPartner): Promise<boolean> {
-        const { document } = partner;
-        const partners = await this.repository.findByDocument(document);
-        return partners.length === 0;
+        const exists = await this.repository.findByDocument(partner.document);
+        return !exists;
     }
 
     async hasUniqueId(partner: IPartner): Promise<boolean> {
-        const exists = await this.repository.exists(partner);
-        return !exists;
+        if (partner.id) {
+            const exists = await this.repository.findById(partner.id);
+            return !exists;
+        }
+        return false;
     }
 
     hasValidAdress(partner: IPartner): boolean {
