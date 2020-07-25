@@ -1,20 +1,24 @@
 import 'reflect-metadata';
+import './container';
 
 import express, { Request, Response, NextFunction } from 'express';
+import { container } from 'tsyringe';
 
-import connectDatabase from './database';
 import routes from './routes';
-import NegocioError from './NegocioError';
+import NegocioError from './errors/NegocioError';
+import IDatabase from './IDatabase';
 
 const port = process.env.PORT || 3000;
 
+const database = container.resolve<IDatabase>('Database');
+
 const app = express();
 
-connectDatabase();
+database.connect();
 
 app.use(routes);
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
     if (err instanceof NegocioError) {
         const { status, msgs } = err;
         return res.status(status).send({ msgs, timestamp: new Date() });

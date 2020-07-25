@@ -1,15 +1,17 @@
-import { injectable } from 'tsyringe';
+import { injectable, inject } from 'tsyringe';
 // eslint-disable-next-line import/no-unresolved
 import { Point } from 'geojson';
 
 import { validatePoint } from '../../utils/Validate';
-import NegocioError from '../../NegocioError';
-import { IPartner } from '../repositories/PartnerSchema';
-import PartnerRepository from '../repositories/PartnerRepository';
+import NegocioError from '../../errors/NegocioError';
+import IPartner from '../entities/IPartner';
+import IPartnerRepository from '../repositories/IPartnerRepository';
 
 @injectable()
 export default class FindPartner {
-    constructor(private repository: PartnerRepository) {}
+    constructor(
+        @inject('PartnerRepository') private repository: IPartnerRepository,
+    ) {}
 
     async byId(id: string): Promise<IPartner | undefined> {
         return this.repository.findById(id);

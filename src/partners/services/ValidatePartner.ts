@@ -1,12 +1,15 @@
-import { injectable } from 'tsyringe';
+import { injectable, inject } from 'tsyringe';
 
 import { validatePoint, validateMultipolygon } from '../../utils/Validate';
-import { IPartner } from '../repositories/PartnerSchema';
-import PartnerRepository from '../repositories/PartnerRepository';
+
+import IPartner from '../entities/IPartner';
+import IPartnerRepository from '../repositories/IPartnerRepository';
 
 @injectable()
 export default class ValidatePartner {
-    constructor(private repository: PartnerRepository) {}
+    constructor(
+        @inject('PartnerRepository') private repository: IPartnerRepository,
+    ) {}
 
     async hasUniqueDocument(partner: IPartner): Promise<boolean> {
         const exists = await this.repository.findByDocument(partner.document);

@@ -1,23 +1,15 @@
 import mongoose, { Schema, Document } from 'mongoose';
 // eslint-disable-next-line import/no-unresolved
 import { MultiPolygon, Point } from 'geojson';
+import IPartner from '../../../partners/entities/IPartner';
 
-interface IPartnerSchema extends Document {
+interface IPartnerSchema extends Document, IPartner {
     id: string;
     tradingName: string;
     ownerName: string;
     document: string;
     coverageArea?: MultiPolygon;
     address?: Point;
-}
-
-interface IPartner {
-    id?: IPartnerSchema['id'];
-    tradingName: IPartnerSchema['tradingName'];
-    ownerName: IPartnerSchema['ownerName'];
-    document: IPartnerSchema['document'];
-    coverageArea?: IPartnerSchema['coverageArea'];
-    address?: IPartnerSchema['address'];
 }
 
 const PartnerSchema = new Schema({
@@ -29,6 +21,6 @@ const PartnerSchema = new Schema({
     address: { type: Object, index: '2dsphere' },
 });
 
-const Partner = mongoose.model<IPartnerSchema>('Partner', PartnerSchema);
+const PartnerModel = mongoose.model<IPartnerSchema>('Partner', PartnerSchema);
 
-export { IPartner, Partner };
+export { IPartnerSchema, PartnerModel };

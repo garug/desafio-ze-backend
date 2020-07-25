@@ -5,7 +5,7 @@ import { Point } from 'geojson';
 
 import CreatePartner from '../services/CreatePartner';
 import FindPartner from '../services/FindPartner';
-import { IPartner } from '../repositories/PartnerSchema';
+import IPartner from '../entities/IPartner';
 
 const partnerController = Router();
 const createPartner = container.resolve(CreatePartner);

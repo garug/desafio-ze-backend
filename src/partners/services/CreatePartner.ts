@@ -1,16 +1,18 @@
-import { container, injectable } from 'tsyringe';
+import { container, injectable, inject } from 'tsyringe';
 import { v4 as uuid } from 'uuid';
 
 import ValidatePartner from './ValidatePartner';
-import NegocioError from '../../NegocioError';
-import PartnerRepository from '../repositories/PartnerRepository';
-import { IPartner } from '../repositories/PartnerSchema';
+import NegocioError from '../../errors/NegocioError';
+import IPartner from '../entities/IPartner';
+import IPartnerRepository from '../repositories/IPartnerRepository';
 
 const validate = container.resolve(ValidatePartner);
 
 @injectable()
 export default class CreatePartner {
-    constructor(private repository: PartnerRepository) {}
+    constructor(
+        @inject('PartnerRepository') private repository: IPartnerRepository,
+    ) {}
 
     async execute(createPartner: IPartner): Promise<IPartner> {
         createPartner.id = createPartner.id || uuid();
