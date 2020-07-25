@@ -1,22 +1,23 @@
-import { injectable } from 'tsyringe';
+import { container, injectable } from 'tsyringe';
+import { v4 as uuid } from 'uuid';
 
-import PartnerRepository from '../PartnerRepository';
-import { IPartner } from '../PartnerModel';
+import ValidatePartner from './ValidatePartner';
+import NegocioError from '../../NegocioError';
+import PartnerRepository from '../repositories/PartnerRepository';
+import { IPartner } from '../repositories/PartnerSchema';
+
+const validate = container.resolve(ValidatePartner);
 
 @injectable()
 export default class CreatePartner {
     constructor(private repository: PartnerRepository) {}
 
-    execute(partner: IPartner): Promise<IPartner> {
-        if (partner.id) {
-            this.verifyExists(partner.id);
+    async execute(createPartner: IPartner): Promise<IPartner> {
+        createPartner.id = createPartner.id || uuid();
+        const erros = await validate.validateForCreate(createPartner);
+        if (erros.length === 0) {
+            return this.repository.save(createPartner);
         }
-        return this.repository.save(partner);
-    }
-
-    private verifyExists(id: string): void {
-        if (this.repository.findById(id)) {
-            throw new Error('This partner already saved');
-        }
+        throw new NegocioError(erros);
     }
 }

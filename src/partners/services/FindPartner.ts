@@ -2,8 +2,10 @@ import { injectable } from 'tsyringe';
 // eslint-disable-next-line import/no-unresolved
 import { Point } from 'geojson';
 
-import PartnerRepository from '../PartnerRepository';
-import { IPartner } from '../PartnerModel';
+import { validatePoint } from '../../utils/Validate';
+import NegocioError from '../../NegocioError';
+import { IPartner } from '../repositories/PartnerSchema';
+import PartnerRepository from '../repositories/PartnerRepository';
 
 @injectable()
 export default class FindPartner {
@@ -14,11 +16,10 @@ export default class FindPartner {
     }
 
     async nearest(point: Point): Promise<Array<IPartner>> {
-        const filter = {
-            limit: 10,
-            distance: 500,
-            point,
-        };
-        return this.repository.findNearest(filter);
+        const errors = validatePoint(point);
+        if (errors.length > 0) {
+            throw new NegocioError(errors);
+        }
+        return this.repository.findBySpecificLocation(point);
     }
 }
