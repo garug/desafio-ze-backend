@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
-const uri =
-    'mongodb+srv://ze-user:W5w7Wy4g9qcSna@cluster0-jjz8t.gcp.mongodb.net/ze?retryWrites=true&w=majority';
+const uri = 'mongodb://localhost:27017/ze';
 
 export default (): void => {
     const connect = () => {
