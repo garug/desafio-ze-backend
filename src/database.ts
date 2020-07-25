@@ -8,9 +8,7 @@ export default (): void => {
         console.log('Connecting to database...');
         mongoose
             .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-            .then(() => {
-                return console.log('Database Connected!');
-            })
+            .then(() => console.log('Database Connected!'))
             .catch(error => {
                 console.log('Error connecting to database: ', error);
                 return process.exit(1);
