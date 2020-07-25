@@ -15,6 +15,7 @@
     },
     "plugins": ["@typescript-eslint", "prettier"],
     "rules": {
+        "class-methods-use-this": "off",
         "no-useless-constructor": "off",
         "no-param-reassign": ["error", { "props": false }],
         "no-console": "off",
