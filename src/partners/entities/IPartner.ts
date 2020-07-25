@@ -2,7 +2,7 @@
 import { MultiPolygon, Point } from 'geojson';
 
 export default interface IPartner {
-    id?: string;
+    id: string;
     tradingName: string;
     ownerName: string;
     document: string;
