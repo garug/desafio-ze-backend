@@ -1,7 +1,7 @@
 {
   "name": "ze-challenge-backend",
   "version": "1.0.0-SNAPSHOT",
-  "description": "Project for backend challeng of Zé Delivery",
+  "description": "Project for backend challenge of Zé Delivery",
   "main": "src/index.ts",
   "scripts": {
     "test": "npm test",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/mongoose": "^5.7.32",
     "express": "^4.17.1",
+    "geojson-validation": "^1.0.2",
     "mongoose": "^5.9.25",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.3.0",
