@@ -14,7 +14,7 @@ const findPartner = container.resolve(FindPartner);
 partnerController.post('/', async (req, res, next) => {
     try {
         const newPartner: IPartner = { ...req.body };
-        const savedPartner = await createPartner.execute(newPartner);
+        const savedPartner = await createPartner.create(newPartner);
         return res
             .status(201)
             .location(`${req.originalUrl}/${savedPartner.id}`)

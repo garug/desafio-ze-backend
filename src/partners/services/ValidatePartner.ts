@@ -17,14 +17,11 @@ export default class ValidatePartner {
     }
 
     async hasUniqueId(partner: IPartner): Promise<boolean> {
-        if (partner.id) {
-            const exists = await this.repository.findById(partner.id);
-            return !exists;
-        }
-        return false;
+        const exists = await this.repository.findById(partner.id);
+        return !exists;
     }
 
-    hasValidAdress(partner: IPartner): boolean {
+    hasValidAddress(partner: IPartner): boolean {
         if (partner.address) {
             return validatePoint(partner.address).length === 0;
         }
@@ -54,8 +51,8 @@ export default class ValidatePartner {
             errors.push('This id already saved');
         }
 
-        if (!this.hasValidAdress(partner)) {
-            errors.push("'adress' is not a valid GeoJSON Point");
+        if (!this.hasValidAddress(partner)) {
+            errors.push("'address' is not a valid GeoJSON Point");
         }
 
         if (!this.hasValidCoverageArea(partner)) {
