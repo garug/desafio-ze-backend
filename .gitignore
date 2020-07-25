@@ -5,3 +5,6 @@ node_modules
 # Environment Files
 .env.local
 .env.*.local
+
+# Coverage report
+/coverage
