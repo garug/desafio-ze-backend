@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import IDatabase from '../../../IDatabase';
+import IDatabase from '../IDatabase';
 
 const uri = 'mongodb://localhost:27017/ze';
 

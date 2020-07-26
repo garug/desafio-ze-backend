@@ -6,7 +6,7 @@ import { container } from 'tsyringe';
 
 import routes from './routes';
 import NegocioError from './errors/NegocioError';
-import IDatabase from './IDatabase';
+import IDatabase from './infra/database/IDatabase';
 
 const port = process.env.PORT || 3000;
 
@@ -25,7 +25,7 @@ app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
     }
     console.error(err);
     res.status(500);
-    return res.render('error', { error: err });
+    return res.json({ msgs: [err.message], error: err });
 });
 
 app.listen(port, () => console.log(`Server started! Port: ${port}`));
