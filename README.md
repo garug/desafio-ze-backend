@@ -5,18 +5,18 @@ The original challenge can be found [here](https://github.com/ZXVentures/ze-code
 
 # Summary
 
--   The Challenge
-    -- Create a Partner
-    -- Load partner by id
-    -- Search partner
--   The Project
-    -- Technologies
-    -- Endpoints
-    -- Running locally
-    -- Production build
--   Tests
-    -- Jest
-    -- Cypress
+*   [The Challenge](#the-challenge)
+    * [Create a Partner](#create-a-partner)
+    * [Load partner by id](#load-partner-by-id)
+    * [Search partner](#search-partner)
+*   [The Project](#the-project)
+    * [Technologies](#technologies)
+    * [Endpoints](#endpoints)
+    * [Running locally](#running-locally)
+    * [Production build](#production-build)
+*   [Tests](#tests)
+    * [Jest](#jest)
+    * [Cypress](#cypress)
 
 # The Challenge
 
@@ -161,6 +161,7 @@ Exists two suits case for test this project.
 ==================
 
 The official challenge offers a json file to test case, but this json have some inconstence Multipolygon, like this above:
+
 ![](https://i.imgur.com/Pn8VkU7.jpg)
 
 I fix some of them for my test case.
