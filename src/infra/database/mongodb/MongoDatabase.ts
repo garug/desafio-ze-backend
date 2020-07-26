@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import IDatabase from '../IDatabase';
 
-const uri = 'mongodb://localhost:27017/ze';
+const uri: string = process.env.DB_MONGO_URL || 'mongodb://localhost:27017/ze';
 
 export default class MongoDatabase implements IDatabase {
     connect(): void {
