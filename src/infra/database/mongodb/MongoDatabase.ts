@@ -7,7 +7,11 @@ export default class MongoDatabase implements IDatabase {
     connect(): void {
         console.log('Connecting to database...');
         mongoose
-            .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+            .connect(uri, {
+                useNewUrlParser: true,
+                useCreateIndex: true,
+                useUnifiedTopology: true,
+            })
             .then(() => console.log('Database Connected!'))
             .catch(error => {
                 console.log('Error connecting to database: ', error);
